@@ -130,3 +130,4 @@ dmypy.json
 
 # local config
 config.py
+.env.dev
