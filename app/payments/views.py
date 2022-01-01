@@ -18,7 +18,7 @@ def home_view(request):
     domain_url = 'http://localhost:8000/'
     product = {
         'name': 'Whiskey',
-        'description': 'Sweet sweet nectar.',
+        'description': 'Sweet sweet nectar',
         'local_price': {
             'amount': '5.00',
             'currency': 'EUR'
