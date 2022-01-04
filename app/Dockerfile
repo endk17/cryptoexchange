@@ -69,7 +69,7 @@ RUN pip install --no-cache /wheels/*
 COPY . .
 
 # collect static files for local dev
-# RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
 
 # add and run as non-root user
 RUN adduser --disabled-password myuser
