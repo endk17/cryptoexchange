@@ -16,6 +16,7 @@ jobs:
           heroku_app_name: "fierce-retreat-10367"
           heroku_email: "endakelly@emk-solutions.net"
           usedocker: true
+          appdir: app 
           docker_build_args: |
             NODE_ENV
             SECRET_KEY
