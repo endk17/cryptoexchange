@@ -46,7 +46,6 @@ ENV PYTHONUNBUFFERED 1
 ENV DEBUG False
 ARG SECRET_KEY
 ENV SECRET_KEY $SECRET_KEY
-ENV DJANGO_ALLOWED_HOSTS .herokuapp.com
 ARG PORT
 ENV PORT $PORT
 ARG COINBASE_COMMERCE_API_KEY
@@ -77,3 +76,5 @@ USER myuser
 
 # run gunicorn
 CMD gunicorn core.wsgi:application --bind 0.0.0.0:$PORT
+# CMD gunicorn core.wsgi:application --bind 0.0.0.0:8000
+# CMD python manage.py runserver 0.0.0.0:8000
