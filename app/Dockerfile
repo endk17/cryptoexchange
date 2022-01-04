@@ -51,6 +51,8 @@ ARG PORT
 ENV PORT $PORT
 ARG COINBASE_COMMERCE_API_KEY
 ENV COINBASE_COMMERCE_API_KEY $COINBASE_COMMERCE_API_KEY
+ARG DJANGO_ALLOWED_HOSTS
+ENV DJANGO_ALLOWED_HOSTS $DJANGO_ALLOWED_HOSTS
 
 # install system dependencies
 RUN apt-get update \
@@ -66,8 +68,8 @@ RUN pip install --no-cache /wheels/*
 # copy project
 COPY . .
 
-# # collect static files for local dev
-# RUN python manage.py collectstatic --noinput
+# collect static files for local dev
+RUN python manage.py collectstatic --noinput
 
 # add and run as non-root user
 RUN adduser --disabled-password myuser
