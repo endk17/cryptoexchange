@@ -12,10 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
-from core import config
-
-COINBASE_COMMERCE_API_KEY = config.COINBASE_COMMERCE_API_KEY
-COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET = config.COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET
+COINBASE_COMMERCE_API_KEY =  os.environ.get("COINBASE_COMMERCE_API_KEY")
+COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET = os.environ.get("COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

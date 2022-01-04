@@ -16,12 +16,14 @@ jobs:
           heroku_app_name: "fierce-retreat-10367"
           heroku_email: "endakelly@emk-solutions.net"
           usedocker: true
-          appdir: app
+          appdir: app 
           docker_build_args: |
             NODE_ENV
             SECRET_KEY
             PORT
+            COINBASE_COMMERCE_API_KEY
         env:
           NODE_ENV: production
           SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
           PORT: ${{ secrets.DJANGO_APP_PORT }}
+          COINBASE_COMMERCE_API_KEY: ${{ secrets.COINBASE_COMMERCE_API_KEY }}
