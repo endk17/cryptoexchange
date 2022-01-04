@@ -10,16 +10,3 @@ services:
       - 8000:8000
     env_file:
       - ./app/.env.dev
-    depends_on:
-      - web-db
-  web-db:
-    image: postgres:14.0-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=ecom_crypto
-      - POSTGRES_PASSWORD=ecom_crypto
-      - POSTGRES_DB=ecom_crypto_dev
-
-volumes:
-  postgres_data:

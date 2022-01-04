@@ -1,52 +1,26 @@
-name: Continuous Integration and Delivery
+name: Deploy
 
-on: [push]
-
-env:
-  WEB_IMAGE: ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/web
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-
   build:
-    name: Build Docker Image
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout master
-        uses: actions/checkout@v1
-      - name: Add environment variables to .env
-        run: |
-          echo DEBUG=0 >> .env
-          echo SQL_ENGINE=django.db.backends.postgresql >> .env
-          echo DATABASE=postgres >> .env
-          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
-          echo SQL_DATABASE=${{ secrets.SQL_DATABASE }} >> .env
-          echo SQL_USER=${{ secrets.SQL_USER }} >> .env
-          echo SQL_PASSWORD=${{ secrets.SQL_PASSWORD }} >> .env
-          echo SQL_HOST=${{ secrets.SQL_HOST }} >> .env
-          echo SQL_PORT=${{ secrets.SQL_PORT }} >> .env
-      - name: Set environment variables
-        run: |
-          echo "WEB_IMAGE=$(echo ${{env.WEB_IMAGE}} )" >> $GITHUB_ENV
-      - name: Log in to GitHub Packages
-        run: echo ${PERSONAL_ACCESS_TOKEN} | docker login ghcr.io -u ${{ secrets.NAMESPACE }} --password-stdin
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "fierce-retreat-10367"
+          heroku_email: "endakelly@emk-solutions.net"
+          usedocker: true
+          docker_build_args: |
+            NODE_ENV
+            SECRET_KEY
+            PORT
         env:
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      - name: Pull image
-        run: |
-          docker pull ${{ env.WEB_IMAGE }} || true
-      - name: Build images
-        run: |
-          docker build
-            --cache-from $IMAGE:latest
-            --cache-from $IMAGE:builder
-            --tag $IMAGE:latest
-            --file ./Dockerfile.prod
-            --build-arg SECRET_KEY=$SECRET_KEY
-            "."
-      - name: Push image
-        run: |
-          docker push ${{ env.WEB_IMAGE }}
-
-  test:
-    name: Test Docker Image
-    runs-on: ubuntu-latest
+          NODE_ENV: production
+          SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
+          PORT: ${{ secrets.DJANGO_APP_PORT }}
