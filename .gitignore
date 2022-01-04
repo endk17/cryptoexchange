@@ -129,8 +129,8 @@ dmypy.json
 .pyre/
 
 # local config
-config-local.py
-settings-local.py
+configlocal.py
+settingslocal.py
 .env.dev
 .env.prod
 .env.prod.db
