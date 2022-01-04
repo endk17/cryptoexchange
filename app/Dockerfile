@@ -50,8 +50,8 @@ ARG PORT
 ENV PORT $PORT
 ARG COINBASE_COMMERCE_API_KEY
 ENV COINBASE_COMMERCE_API_KEY $COINBASE_COMMERCE_API_KEY
-ARG DJANGO_ALLOWED_HOSTS
-ENV DJANGO_ALLOWED_HOSTS $DJANGO_ALLOWED_HOSTS
+# ARG DJANGO_ALLOWED_HOSTS
+# ENV DJANGO_ALLOWED_HOSTS $DJANGO_ALLOWED_HOSTS
 
 # install system dependencies
 RUN apt-get update \
@@ -76,5 +76,3 @@ USER myuser
 
 # run gunicorn
 CMD gunicorn core.wsgi:application --bind 0.0.0.0:$PORT
-# CMD gunicorn core.wsgi:application --bind 0.0.0.0:8000
-# CMD python manage.py runserver 0.0.0.0:8000
