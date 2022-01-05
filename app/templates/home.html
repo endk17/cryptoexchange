@@ -1,18 +1,18 @@
 {% load static %}
 <html lang="en">
   <head>
-    <title>Django + Coinbase Pay</title>
+    <title>E-Crypto: Home</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
   </head>
   <base href="/">
   <body>
+
     <div class="container mt-5">
-      <div class="card w-25">
+      <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h3 class="card-title">{{ charge.name }}</h3>
-          <!-- <img src="{% static '/img/whiskey_1.jpeg' %}" alt="the-finest" width="250" height="200"> -->
-          <img src='../static/img/whiskey_1.jpeg' alt="the finest" width="250" height="200">
+          <img src="{% static '/img/whiskey_1.jpeg' %}" alt="the-finest" style="width:100%">
           <p class="card-text">
             <span>{{ charge.description }}</span>
             <br>
@@ -24,5 +24,6 @@
         </div>
       </div>
     </div>
+
   </body>
 </html>

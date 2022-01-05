@@ -10,13 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-from pathlib import Path
+# import environ
+# from pathlib import Path
 
-COINBASE_COMMERCE_API_KEY =  os.environ.get("COINBASE_COMMERCE_API_KEY")
-COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET = os.environ.get("COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET")
+COINBASE_COMMERCE_API_KEY = os.environ.get('COINBASE_API_KEY')
+COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET = os.environ.get('COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -24,16 +25,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", default=False)
-SECRET_KEY = os.environ.get("SECRET_KEY")
-# SECRET_KEY = 'foo'
+DEBUG = bool(os.environ.get('DEBUG', default=False))
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='django-insecure-$lko+#jpt#ehi5')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.herokuapp.com']
 
-ALLOWED_HOSTS=[
-    "localhost",
-    "127.0.0.1",
-    "[::1]",
-    ".herokuapp.com"
-]
+# if DEBUG == False:
+#     SECURE_HSTS_SECONDS = 3600
+#     SECURE_CONTENT_TYPE_NOSNIFF = True
+#     SECURE_BROWSER_XSS_FILTER = True
+#     SECURE_SSL_REDIRECT = True
+#     SESSION_COOKIE_SECURE = True
+#     CSRF_COOKIE_SECURE = True
+#     X_FRAME_OPTIONS = "DENY"
+#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#     SECURE_HSTS_PRELOAD = True
+#     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+#     SECURE_REFERRER_POLICY = "same-origin"
 
 
 
@@ -51,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -123,6 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (

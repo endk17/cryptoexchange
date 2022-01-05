@@ -4,7 +4,7 @@ from coinbase_commerce.client import Client
 from coinbase_commerce.error import SignatureVerificationError, WebhookInvalidPayload
 from coinbase_commerce.webhook import Webhook
 from core import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -16,7 +16,7 @@ def home_view(request):
     client = Client(api_key=settings.COINBASE_COMMERCE_API_KEY)
     domain_url = "http://localhost:8000/"
     product = {
-        "name": "Whiskey",
+        "name": "₿ig (Ξ)'s Whiskey",
         "description": "Sweet sweet nectar",
         "local_price": {"amount": "5.00", "currency": "EUR"},
         "pricing_type": "fixed_price",
@@ -69,3 +69,7 @@ def coinbase_webhook(request):
 
     logger.info(f"Received event: id={event.id}, type={event.type}")
     return HttpResponse("ok", status=200)
+
+def ping(request):
+    data = {'ping': 'pong!'}
+    return JsonResponse(data)
