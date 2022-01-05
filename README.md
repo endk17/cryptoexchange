@@ -21,7 +21,7 @@ In the above example I am using [venv](https://docs.python.org/3/library/venv.ht
 Feel free to switch this to: [Pipenv](https://pipenv.pypa.io/en/latest/) or perhaps [Poetry](https://python-poetry.org/)
 
 ```shell
-(ecrypto)$ pip install django==3.2.8
+(ecrypto)$ pip install django==3.2.10
 (ecrypto)$ django-admin startproject core .
 (ecrypto)$ python manage.py startapp payments
 ```
