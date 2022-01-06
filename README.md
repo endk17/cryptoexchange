@@ -18,7 +18,8 @@ source env/bin/activate
 ```
 
 In the above example I am using [venv](https://docs.python.org/3/library/venv.html#module-venv)
-Feel free to switch this to: [Pipenv](https://pipenv.pypa.io/en/latest/) or perhaps [Poetry](https://python-poetry.org/)
+
+Alternatives might include: [Pipenv](https://pipenv.pypa.io/en/latest/) or perhaps [Poetry](https://python-poetry.org/)
 
 ```shell
 (ecrypto)$ pip install django==3.2.10
@@ -38,4 +39,7 @@ This is a live POC project this resides on [Heroku](https://www.heroku.com/)
 URL: https://fierce-retreat-10367.herokuapp.com
 
 
-*** Note: If any issues or errors are noted please log a GitHub issue for further review and discussion *** 
+***Note: If any issues or errors are noted please log a GitHub issue for further review and discussion*** 
+
+
+## External Comments
