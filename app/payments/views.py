@@ -9,17 +9,20 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
+
 # Create your views here.
-
-
 def home_view(request):
     logger = logging.getLogger(__name__)
 
-    hostname = request.get_host() #.split(":", 1)[0]
-    logger.info(f"Hostname: {hostname}")
     client = Client(api_key=settings.COINBASE_COMMERCE_API_KEY)
     domain_url = "http://localhost:8000/"
-    
+
+    hostname = request.get_host().split(":", 1)[0]
+    if hostname in ("testserver", "localhost", "127.0.0.1"):
+        domain_url = "http://localhost:8000/"
+    else:
+        domain_url = f"https://{hostname}/"
+
     product = {
         "name": "₿ig (Ξ)'s Whiskey",
         "description": "Sweet sweet nectar",
@@ -75,6 +78,20 @@ def coinbase_webhook(request):
     logger.info(f"Received event: id={event.id}, type={event.type}")
     return HttpResponse("ok", status=200)
 
+
 def ping(request):
-    data = {'ping': 'pong!'}
+
+    request_type = request.is_secure()
+    hostname = request.get_host().split(":", 1)[0]
+    if hostname in ("testserver", "localhost", "127.0.0.1"):
+        domain_url = "localhost:8000/"
+    else:
+        domain_url = f"https://{hostname}/"
+
+    data = {
+        'ping': 'pong!',
+        'hostname': domain_url,
+        'request_type': request_type
+    }
+
     return JsonResponse(data)
