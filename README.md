@@ -29,3 +29,13 @@ Feel free to switch this to: [Pipenv](https://pipenv.pypa.io/en/latest/) or perh
 ### Local Environment - Django, Home Page & Coinbase
 
 Please refer to the project [Wiki page](https://github.com/endk17/cryptoexchange/wiki) for further details
+
+
+## Hosting
+
+This is a live POC project this resides on [Heroku](https://www.heroku.com/)
+
+URL: https://fierce-retreat-10367.herokuapp.com
+
+
+*** Note: If any issues or errors are noted please log a GitHub issue for further review and discussion *** 

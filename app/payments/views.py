@@ -1,18 +1,19 @@
 import logging
 
 from coinbase_commerce.client import Client
-from coinbase_commerce.error import SignatureVerificationError, WebhookInvalidPayload
+from coinbase_commerce.error import (SignatureVerificationError,
+                                     WebhookInvalidPayload)
 from coinbase_commerce.webhook import Webhook
-from core import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+
+from core import settings
 
 
 # Create your views here.
 def home_view(request):
-    logger = logging.getLogger(__name__)
 
     client = Client(api_key=settings.COINBASE_COMMERCE_API_KEY)
     domain_url = "http://localhost:8000/"
@@ -39,7 +40,7 @@ def home_view(request):
     }
     charge = client.charge.create(**product)
 
-    return render(request, "home.html", {"charge": charge,})
+    return render(request, "home.html", {"charge": charge, })
 
 
 def success_view(request):
@@ -73,10 +74,7 @@ def coinbase_webhook(request):
             customer_username = event["data"]["metadata"]["customer_username"]
 
     except (SignatureVerificationError, WebhookInvalidPayload) as e:
-        logger.info(
-            "Coinbase Webhook\n"
-            f"Error event: {e}"
-        )
+        logger.info("Coinbase Webhook\n" f"Error event: {e}")
         return HttpResponse("Error", status=400)
 
     logger.info(f"Received event: id={event.id}, type={event.type}")
@@ -92,10 +90,6 @@ def ping(request):
     else:
         domain_url = f"https://{hostname}/"
 
-    data = {
-        'ping': 'pong!',
-        'hostname': domain_url,
-        'request_type': request_type
-    }
+    data = {"ping": "pong!", "hostname": domain_url, "request_type": request_type}
 
     return JsonResponse(data)
