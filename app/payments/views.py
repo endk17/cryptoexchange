@@ -73,7 +73,11 @@ def coinbase_webhook(request):
             customer_username = event["data"]["metadata"]["customer_username"]
 
     except (SignatureVerificationError, WebhookInvalidPayload) as e:
-        return HttpResponse(e, status=400)
+        logger.info(
+            "Coinbase Webhook\n"
+            f"Error event: {e}"
+        )
+        return HttpResponse("Error", status=400)
 
     logger.info(f"Received event: id={event.id}, type={event.type}")
     return HttpResponse("ok", status=200)
