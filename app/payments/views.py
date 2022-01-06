@@ -5,7 +5,7 @@ from coinbase_commerce.error import SignatureVerificationError, WebhookInvalidPa
 from coinbase_commerce.webhook import Webhook
 from core import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
@@ -13,8 +13,13 @@ from django.views.decorators.http import require_http_methods
 
 
 def home_view(request):
+    logger = logging.getLogger(__name__)
+
+    hostname = request.get_host() #.split(":", 1)[0]
+    logger.info(f"Hostname: {hostname}")
     client = Client(api_key=settings.COINBASE_COMMERCE_API_KEY)
     domain_url = "http://localhost:8000/"
+    
     product = {
         "name": "₿ig (Ξ)'s Whiskey",
         "description": "Sweet sweet nectar",
