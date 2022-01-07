@@ -46,8 +46,8 @@ URL: https://fierce-retreat-10367.herokuapp.com
 
 ***Note: If any issues or errors are noted please log a GitHub issue for further review and discussion*** 
 
-***WARNING: As this is a publicly hosted application there is an attached cookie web policy which is which correlated to the original creator***
-***This should be adjusted to suit your own specific needs if you intend to utilise this solution elsewhere***
+***WARNING: As this is a publicly hosted application there is an attached cookie web policy in the [home.html](https://github.com/endk17/cryptoexchange/blob/main/app/templates/home.html#L18-L42) which is correlated to the original creator***
+***This should be swapped out and/or adjusted to suit your own specific needs if you intend to utilise this solution elsewhere***
 
 
 ## External Comments
