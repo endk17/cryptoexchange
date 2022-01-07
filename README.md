@@ -1,5 +1,10 @@
 # CryptoExchange
 
+[![Docker Build + Push](https://github.com/endk17/cryptoexchange/actions/workflows/docker_build_push_deploy.yml/badge.svg)](https://github.com/endk17/cryptoexchange/actions/workflows/docker_build_push_deploy.yml)
+[![Heroku Build + Deploy](https://github.com/endk17/cryptoexchange/actions/workflows/heroku_deploy.yml/badge.svg)](https://github.com/endk17/cryptoexchange/actions/workflows/heroku_deploy.yml)
+[![CodeQL](https://github.com/endk17/cryptoexchange/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/endk17/cryptoexchange/actions/workflows/codeql-analysis.yml)
+
+
 Crypto + Whiskey = 🚀🚀🚀
 
 Your one stop whiskey shop for concocting all your favorite boilermakers
