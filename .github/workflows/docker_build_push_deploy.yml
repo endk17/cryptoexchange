@@ -12,8 +12,6 @@ on:
 
 env:
   IMAGE_NAME: ecrypto
-  HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
-  HEROKU_REGISTRY_IMAGE: registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
 
 jobs:
   # Push image to GitHub Packages.
@@ -57,21 +55,3 @@ jobs:
           echo VERSION=$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
-
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy image
-        run: |
-          cd ./app
-          docker login -u _ -p $HEROKU_API_KEY registry.heroku.com
-          docker pull $HEROKU_REGISTRY_IMAGE || true
-          docker build . --cache-from $HEROKU_REGISTRY_IMAGE --tag $HEROKU_REGISTRY_IMAGE --file ./Dockerfile
-          docker push $HEROKU_REGISTRY_IMAGE
-          chmod +x ./heroku_release.sh
-          ./heroku_release.sh
