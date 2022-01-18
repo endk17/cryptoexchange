@@ -13,7 +13,7 @@ import os
 
 COINBASE_COMMERCE_API_KEY = os.environ.get("COINBASE_API_KEY")
 COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET = os.environ.get(
-    "COINBASE_COMMERCE_WEBHOOK_SHARED_SECRET"
+    "COINBASE_COMMERCE_WEBHOOK_SECRET"
 )
 
 
@@ -29,7 +29,7 @@ DEBUG = bool(os.environ.get("DEBUG", default=False))
 SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY", default="django-insecure-$lko+#jpt#ehi5"
 )
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "[::1]", ".herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "[::1]", ".herokuapp.com", ".cloudnua.io"]
 
 if DEBUG is False:
     SECURE_HSTS_SECONDS = 3600
